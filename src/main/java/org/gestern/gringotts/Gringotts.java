@@ -6,6 +6,7 @@ import io.ebean.Transaction;
 import io.ebean.config.DatabaseConfig;
 import io.ebean.datasource.DataSourceConfig;
 import net.milkbowl.vault.economy.Economy;
+import com.lishid.openinv.IOpenInv;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.AdvancedPie;
 import org.bstats.charts.DrilldownPie;
@@ -66,6 +67,7 @@ public class Gringotts extends JavaPlugin {
     private Accounting accounting;
     private DAO dao;
     private Eco eco;
+	private IOpenInv openInv;
 
     /**
      * Instantiates a new Gringotts.
@@ -97,6 +99,8 @@ public class Gringotts extends JavaPlugin {
         Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
         ebean = DatabaseFactory.create(cfg);
         Thread.currentThread().setContextClassLoader(previousCL);
+
+		openInv = (IOpenInv) Bukkit.getPluginManager().getPlugin("OpenInv");
     }
 
     /**
@@ -466,5 +470,9 @@ public class Gringotts extends JavaPlugin {
 
     public PendingOperationManager getPendingOperationManager() {
         return pendingOperationManager;
+    }
+
+    public IOpenInv getOpenInv() {
+        return openInv;
     }
 }
