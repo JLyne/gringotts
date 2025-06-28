@@ -6,6 +6,7 @@ import io.ebean.Transaction;
 import io.ebean.config.DatabaseConfig;
 import io.ebean.datasource.DataSourceConfig;
 import net.milkbowl.vault.economy.Economy;
+import java.util.logging.Level;
 import com.lishid.openinv.IOpenInv;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.AdvancedPie;
@@ -156,7 +157,7 @@ public class Gringotts extends JavaPlugin {
 
             registerMetrics();
         } catch (GringottsStorageException | GringottsConfigurationException e) {
-            getLogger().severe(e.getMessage());
+            getLogger().log(Level.SEVERE, e.getMessage(), e);
             this.disable();
         } catch (RuntimeException e) {
             this.disable();
